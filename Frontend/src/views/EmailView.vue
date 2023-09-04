@@ -1,15 +1,4 @@
 <script setup>
-import { useEmailStore } from '../stores/emails';
-import Emails from '../components/Emails.vue';
-import ListEmails from '../components/ListEmails.vue';
-import { storeToRefs } from 'pinia';
-
-const useEmail = useEmailStore();
-const { searchFlag } = storeToRefs(useEmail);
-
-const chooseEmail = () => {
-  searchFlag.value = false;
-};
 
 </script>
 

@@ -13,16 +13,6 @@ const backToEmails = () => {
 
 <template>
   <div class="pr-8 pl-8 mb-2 mt-2">
-    <div class="mb-4 sm:px-0 relative">
-      <button @click="backToEmails()" >
-        <span class="absolute inset-y-0 left-0 flex items-center">
-          <svg class="h-8 w-8 fill-slate-300" viewBox="0 0 20 20"></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-          </svg>
-        </span>
-      </button>
-    </div>
     <div class="px-4 sm:px-0">
       <h3 class="text-base font-semibold leading-7 text-gray-900">Applicant Information</h3>
       <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and application.</p>
