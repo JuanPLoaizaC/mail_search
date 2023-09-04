@@ -1,3 +1,18 @@
+<script setup>
+import { useEmailStore } from '../stores/emails';
+import Emails from '../components/Emails.vue';
+import ListEmails from '../components/ListEmails.vue';
+import { storeToRefs } from 'pinia';
+
+const useEmail = useEmailStore();
+const { searchFlag } = storeToRefs(useEmail);
+
+const chooseEmail = () => {
+  searchFlag.value = false;
+};
+
+</script>
+
 <template>
   <div class="flex flex-col pr-8 pl-8" style="margin-top: 1em;">
     <div class="overflow-x-auto">
@@ -27,7 +42,7 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-              <tr class="hover:bg-slate-100">
+              <tr class="hover:bg-slate-100" @click="chooseEmail()">
                 <td
                   class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
                 >
