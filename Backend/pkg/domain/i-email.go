@@ -5,15 +5,16 @@ type IEmail interface {
 	IndexedSearch(bodyrequest IndexedSearchRequest) (*IndexedSearchResponse, error)
 }
 
-// CreateEmailsRequest is the request for the CreateEmails function
-type IndexEmailsRequest struct {
-	Index   string      `json:"index"`
-	Records interface{} `json:"records"`
+// IndexerEmailResponse is the response for the IndexEmailResponse function
+type IndexEmailResponse struct {
+	Code   int                        `json:"code"`
+	Status []IndexEmailStatusResponse `json:"status"`
 }
 
-// Read implements io.Reader.
-func (IndexEmailsRequest) Read(p []byte) (n int, err error) {
-	panic("unimplemented")
+type IndexEmailStatusResponse struct {
+	Name       string `json:"name"`
+	Successful int    `json:"successful"`
+	Failed     int    `json:"failed"`
 }
 
 // IndexedSearchRequest is the request for the IndexedSearch function
@@ -31,12 +32,6 @@ type IndexedSearchRequestQuery struct {
 	Term string `json:"term"`
 	// StartTime string `json:"start_time"`
 	// EndTime   string `json:"end_time"`
-}
-
-// IndexEmailResponse is the response for the IndexEmailResponse function
-type IndexEmailResponse struct {
-	Message     string `json:"message"`
-	RecordCount int    `json:"record_count"`
 }
 
 // IndexedSearchResponse is the response for the IndexedSearch function
@@ -61,5 +56,7 @@ type IndexedSearchResponse struct {
 
 // ErrorReponse is the response of datasource when an error occurs
 type ErrorReponse struct {
-	ErrorMessage string `json:"error"`
+	Code         int    `json:"code"`
+	ErrorDetail  string `json:"error-detail"`
+	ErrorMessage string `json:"message"`
 }
