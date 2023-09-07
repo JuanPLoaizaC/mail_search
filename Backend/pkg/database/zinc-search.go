@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 
-	customerror "github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/database/custom-error"
+	customerror "github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/custom-error"
 	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/domain"
 )
 
@@ -53,7 +53,7 @@ func (zc *ZincSearchClient) IndexEmails(emailsToinsert interface{}) (*domain.Ind
 		if err != nil {
 			return nil, err
 		}
-		return nil, &customerror.CustomDbError{ErrorText: errorResponse.ErrorMessage}
+		return nil, &customerror.CustomError{ErrorText: errorResponse.ErrorMessage}
 	}
 
 	err = json.NewDecoder(resp.Body).Decode(successResponse)
