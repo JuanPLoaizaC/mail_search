@@ -1,10 +1,14 @@
 <script setup>
+import { storeToRefs } from 'pinia';
+import Spinner from '../components/Spinner.vue';
 import { useEmailStore } from '../stores/emails';
 
 const useEmail = useEmailStore();
+const { loading } = storeToRefs(useEmail);
 </script>
 
 <template>
+  <Spinner v-if="loading" />
   <div class="bg-white">
     <div class="relative isolate px-6 pt-14 lg:px-8">
       <div class="absolute inset-x-0 -z-10 transform-gpu overflow-hidden blur-3xl" aria-hidden="true">

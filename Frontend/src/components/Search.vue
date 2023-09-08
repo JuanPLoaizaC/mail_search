@@ -6,14 +6,16 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const useEmail = useEmailStore();
-let { search, emailsList, emailSelected } = storeToRefs(useEmail);
+let { search, emailsList, emailSelected, loading } = storeToRefs(useEmail);
 const { getData } = useGetData();
 
 const searchData = async () => {
+  loading.value = true;
   let data = await getData(search);
   emailsList.value = data.emails;
   emailSelected.value = {};
   router.push("/mails");
+  loading.value = false;
 };
 
 </script>

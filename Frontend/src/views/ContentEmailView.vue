@@ -3,17 +3,14 @@ import { onMounted } from 'vue';
 import { PaperClipIcon } from '@heroicons/vue/20/solid';
 import { useEmailStore } from '../stores/emails';
 import { storeToRefs } from 'pinia';
+import Spinner from '../components/Spinner.vue';
 
 const useEmail = useEmailStore();
-const { search, emailSelected } = storeToRefs(useEmail);
+const { search, emailSelected, loading } = storeToRefs(useEmail);
 
 onMounted(() => {
   highlightSearchTerm();
 });
-
-const backToEmails = () => {
-  emailSelected.value = {};
-};
 
 const highlightSearchTerm = () => {
   let ids = ['subject', 'date', 'from', 'to', 'content'];
@@ -29,11 +26,10 @@ const highlightSearchTerm = () => {
     }
   }
 };
-
-
 </script>
 
 <template>
+  <Spinner v-if="loading" />
   <div class="pr-8 pl-8 mb-2 mt-2">
     <div class="px-4 sm:px-0">
       <h3 class="text-base font-semibold leading-7 text-gray-900">Applicant Information</h3>

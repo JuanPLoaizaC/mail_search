@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useEmailStore } from '../stores/emails';
 import { storeToRefs } from 'pinia';
 import { useRouter } from "vue-router";
+import Spinner from '../components/Spinner.vue';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/20/solid';
 
 let start = ref(0);
@@ -11,7 +12,7 @@ let page = ref(1);
 
 const router = useRouter();
 const useEmail = useEmailStore();
-const { emailsList, emailSelected } = storeToRefs(useEmail);
+const { emailsList, emailSelected, loading } = storeToRefs(useEmail);
 
 const redirectToContent = (email) => {
   router.push(`mails/${email.message_id}`);
@@ -32,6 +33,7 @@ const next = () => {
 </script>
 
 <template>
+  <Spinner v-if="loading" />
   <div class="flex flex-col pr-8 pl-8 mt-1" v-if="emailsList.length > 0">
     <div class="overflow-x-auto">
       <div class="p-1.5 w-full inline-block align-middle">
