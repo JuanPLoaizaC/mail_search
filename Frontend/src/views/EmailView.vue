@@ -5,9 +5,12 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const useEmail = useEmailStore();
-const { emailsList } = storeToRefs(useEmail);
+const { emailsList, emailSelected } = storeToRefs(useEmail);
 
-
+const redirectToContent = (email) => {
+  router.push(`mails/${email.message_id}`);
+  emailSelected.value = email;
+};
 </script>
 
 <template>
@@ -45,7 +48,7 @@ const { emailsList } = storeToRefs(useEmail);
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-              <tr class="hover:bg-slate-100"  v-for="email in emailsList" :key="email.message_id">
+              <tr class="hover:bg-slate-100"  v-for="email in emailsList" :key="email.message_id" @click="redirectToContent({ ... email })">
                 <td class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                   {{ email.date }}
                 </td>
