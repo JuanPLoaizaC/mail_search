@@ -7,8 +7,8 @@ import (
 	"io"
 	"net/http"
 
-	customerror "github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/custom-error"
-	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/domain"
+	customerror "github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/custom-error"
+	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/domain"
 )
 
 var headers = map[string]string{
@@ -64,9 +64,50 @@ func (zc *ZincSearchClient) IndexEmails(emailsToinsert interface{}) (*domain.Ind
 	return successResponse, nil
 }
 
-func (zc *ZincSearchClient) IndexedSearch(bodyrequest domain.IndexedSearchRequest) (*domain.IndexedSearchResponse, error) {
-	// TODO
-	return nil, nil
+func (zc *ZincSearchClient) IndexedSearch(termToSearch string) (*domain.IndexedSearchResponse, error) {
+	successResponse := &domain.IndexedSearchResponse{}
+	errorResponse := &domain.ErrorReponse{}
+	url := fmt.Sprintf("%s/api/%s/_search", defaultZincSearchHost, organizationName)
+
+	bodyRequest := domain.IndexedSearchRequest{
+		Query: domain.QueryIndexedSearchRequest{
+			Sql:  makeSqlQuery(termToSearch),
+			From: 0,
+			Size: 10,
+		},
+		// Aggs: struct{}{},
+	}
+	fmt.Println(bodyRequest.Query.Sql)
+	req, err := makeRequest(url, bodyRequest)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := zc.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	// body, err := io.ReadAll(resp.Body)
+	// if err != nil {
+	// 	fmt.Println("err")
+	// }
+	// fmt.Println(string(body))
+	if resp.StatusCode != http.StatusOK {
+		err := json.NewDecoder(resp.Body).Decode(errorResponse)
+		if err != nil {
+			return nil, err
+		}
+		return nil, &customerror.CustomError{ErrorText: errorResponse.ErrorMessage}
+	}
+
+	err = json.NewDecoder(resp.Body).Decode(successResponse)
+	if err != nil {
+		return nil, err
+	}
+
+	// fmt.Println(successResponse.Hits[0].Content)
+	return successResponse, nil
 }
 
 func makeRequest(url string, body interface{}) (*http.Request, error) {
@@ -110,4 +151,9 @@ func getAuthentication() (string, string) {
 	// }
 	return "juanpablo9730@gmail.com", "Bur11Caldas"
 	// return base64.StdEncoding.EncodeToString([]byte(user + ":" + pass))
+}
+
+func makeSqlQuery(term string) string {
+	columns := "*"
+	return fmt.Sprintf(`SELECT %s FROM %s WHERE match_all('%s')`, columns, streamName, term)
 }
