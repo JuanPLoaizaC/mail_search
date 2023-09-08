@@ -22,7 +22,8 @@ func (a *Api) configureRouter() {
 
 func (a *Api) configureCORS() {
 	a.Router.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"http://127.0.0.1:5173"},
+		AllowedOrigins: []string{"http://localhost:5173"},
+		// AllowedOrigins:   []string{"*"},
 		AllowedMethods:   []string{"GET", "POST", "DELETE"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type"},
 		ExposedHeaders:   []string{"Link"},
