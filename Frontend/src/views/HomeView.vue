@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { useEmailStore } from '../stores/emails';
 
-const mobileMenuOpen = ref(false);
+const useEmail = useEmailStore();
 </script>
 
 <template>
@@ -22,30 +22,3 @@ const mobileMenuOpen = ref(false);
     </div>
   </div>
 </template>
-
-
-<!--
-
-
-  <script setup>
-import { useEmailStore } from '../stores/emails';
-import Emails from '../components/Emails.vue';
-import ListEmails from '../components/ListEmails.vue';
-import { storeToRefs } from 'pinia';
-
-const useEmail = useEmailStore();
-const { search, searchFlag } = storeToRefs(useEmail);
-
-const searchInformation = () => {
-  searchFlag.value = true;
-};
-
-</script>
-
-<template>
-  
-
-  <Emails v-if="searchFlag" />
-  <ListEmails v-else />
-</template>
--->

@@ -1,9 +1,15 @@
 <script setup>
 import { useEmailStore } from '../stores/emails';
 import { storeToRefs } from 'pinia';
+import { useGetData } from "@/composables/getData"; 
 
 const useEmail = useEmailStore();
 const { search } = storeToRefs(useEmail);
+const { getData } = useGetData();
+
+const searchData = async () => {
+  getData(search);
+};
 
 </script>
 
@@ -22,8 +28,11 @@ const { search } = storeToRefs(useEmail);
         </label>
       </div>
       <div>        
-        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"  >Search</button>
+        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" :disabled="search.length < 2 || search.length > 150" @click="searchData" >Search</button>
       </div>
+    </div>
+    <div v-if="search.length < 2 || search.length > 150">
+      <p class="text-left  text-red-700">Must be between 2 and 150 characters</p>
     </div>
   </div>
 </template>
