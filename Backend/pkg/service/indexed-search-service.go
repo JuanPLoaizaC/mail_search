@@ -1,7 +1,9 @@
 package service
 
 import (
-	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/domain"
+	"encoding/json"
+
+	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/domain"
 )
 
 type IndexedSearchService struct {
@@ -15,11 +17,26 @@ func NewIndexedSearchService(ds domain.IEmail) *IndexedSearchService {
 }
 
 func (iss *IndexedSearchService) IndexedSearch(term string) ([]domain.Email, error) {
-	return nil, nil
+	response, err := iss.datasource.IndexedSearch(term)
+	if err != nil {
+		return nil, err
+	}
+
+	return mapResponseToEmails(response), nil
 }
 
 func mapResponseToEmails(response *domain.IndexedSearchResponse) []domain.Email {
 	var emails []domain.Email
+
+	for _, hit := range response.Hits {
+		var email domain.Email
+		contetEmialBytes, _ := json.Marshal(hit)
+		err := json.Unmarshal(contetEmialBytes, &email)
+		if err != nil {
+			continue
+		}
+		emails = append(emails, email)
+	}
 
 	return emails
 }
