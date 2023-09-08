@@ -2,7 +2,7 @@ package domain
 
 type IEmail interface {
 	IndexEmails(emails interface{}) (*IndexEmailResponse, error)
-	IndexedSearch(bodyrequest IndexedSearchRequest) (*IndexedSearchResponse, error)
+	IndexedSearch(term string) (*IndexedSearchResponse, error)
 }
 
 // IndexerEmailResponse is the response for the IndexEmailResponse function
@@ -19,7 +19,7 @@ type IndexEmailStatusResponse struct {
 
 // IndexedSearchRequest is the request for the IndexedSearch function
 type IndexedSearchRequest struct {
-	Aggs  struct{}                  `json:"aggs"`
+	// Aggs  struct{}                  `json:"aggs"`
 	Query QueryIndexedSearchRequest `json:"query"`
 }
 

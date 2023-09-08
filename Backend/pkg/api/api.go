@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/database"
-	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/handler"
-	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/service"
+	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/database"
+	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/handler"
+	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/service"
 	"github.com/go-chi/chi/v5"
 )
 

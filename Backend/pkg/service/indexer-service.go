@@ -8,10 +8,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/domain"
+	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/domain"
 )
 
-const emailFolderPath = "../Files/enron_mail_20110402/maildir"
+const emailFolderPath = "../../Files/enron_mail_20110402/maildir"
 
 type IndexerEmailService struct {
 	datasource domain.IEmail
@@ -43,7 +43,6 @@ func (ies *IndexerEmailService) getMailUsers() ([]string, error) {
 
 	dirs, err := os.ReadDir(emailFolderPath)
 	if err != nil {
-
 		return nil, err
 	}
 

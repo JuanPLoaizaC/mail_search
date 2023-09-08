@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/database"
-	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/service"
+	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/database"
+	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/service"
 )
 
 type Indexer struct {
@@ -32,7 +32,7 @@ func (i *Indexer) configureDependencies() {
 	i.indexerService = indexerEmailService
 }
 
-func (i *Indexer) RunIndexer() {
+func (i *Indexer) Run() {
 	fmt.Println("Indexer is running")
 	i.indexerService.IndexEmails()
 }

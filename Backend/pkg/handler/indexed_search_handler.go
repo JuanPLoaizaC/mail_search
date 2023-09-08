@@ -3,8 +3,8 @@ package handler
 import (
 	"net/http"
 
-	customerror "github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/custom-error"
-	"github.com/JuanPLoaizaC/mail_search_truora/tree/main/Backend/pkg/domain"
+	customerror "github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/custom-error"
+	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/domain"
 	"github.com/go-chi/render"
 )
 
@@ -26,7 +26,7 @@ func (ish *IndexedSearchHandler) SearchTermInEmails(w http.ResponseWriter, r *ht
 	query := r.URL.Query()
 	term := query.Get("term")
 
-	if len(term) > 150 || len(term) < 3 {
+	if len(term) > 150 || len(term) < 2 {
 		errMessage := "term invalid. Length must be between 3 and 150"
 		customerror.NewCustomHttpError(http.StatusBadRequest, errMessage).ErrorResponseHandling(w, r)
 		return
