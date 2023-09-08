@@ -73,7 +73,7 @@ func (zc *ZincSearchClient) IndexedSearch(termToSearch string) (*domain.IndexedS
 		Query: domain.QueryIndexedSearchRequest{
 			Sql:  makeSqlQuery(termToSearch),
 			From: 0,
-			Size: 10,
+			Size: 105,
 		},
 		// Aggs: struct{}{},
 	}
