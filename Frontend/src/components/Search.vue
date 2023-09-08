@@ -2,13 +2,17 @@
 import { useEmailStore } from '../stores/emails';
 import { storeToRefs } from 'pinia';
 import { useGetData } from "@/composables/getData"; 
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const useEmail = useEmailStore();
-const { search } = storeToRefs(useEmail);
+let { search, emailsList } = storeToRefs(useEmail);
 const { getData } = useGetData();
 
 const searchData = async () => {
-  getData(search);
+  let data = await getData(search);
+  emailsList.value = data.emails;
+  router.push("/mails");
 };
 
 </script>
