@@ -17,7 +17,7 @@ const { loading } = storeToRefs(useEmail);
       <div class="mx-auto max-w-2xl">
         <div class="text-center">
           <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Email's enron search</h1>
-          <p class="mt-6 text-lg leading-8 text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+          <p class="mt-6 text-lg leading-8 text-gray-600">Welcome to the enron mail search.</p>
         </div>
       </div>
       <div class="absolute inset-x-0 -z-10 transform-gpu overflow-hidden blur-3xl" aria-hidden="true">
