@@ -11,7 +11,9 @@ import (
 	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/domain"
 )
 
-const emailFolderPath = "../../Files/enron_mail_20110402/maildir"
+const emailFolderPath = "../Files/enron_mail_20110402/maildir"
+
+//const emailFolderPath = "../Files/test/maildir"
 
 type IndexerEmailService struct {
 	datasource domain.IEmail

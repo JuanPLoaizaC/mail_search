@@ -13,7 +13,6 @@ import (
 
 var headers = map[string]string{
 	"Content-Type": "application/json",
-	// "Authorization": "Basic",
 }
 
 const (
@@ -75,9 +74,7 @@ func (zc *ZincSearchClient) IndexedSearch(termToSearch string) (*domain.IndexedS
 			From: 0,
 			Size: 105,
 		},
-		// Aggs: struct{}{},
 	}
-	fmt.Println(bodyRequest.Query.Sql)
 	req, err := makeRequest(url, bodyRequest)
 	if err != nil {
 		return nil, err
@@ -88,11 +85,7 @@ func (zc *ZincSearchClient) IndexedSearch(termToSearch string) (*domain.IndexedS
 		return nil, err
 	}
 	defer resp.Body.Close()
-	// body, err := io.ReadAll(resp.Body)
-	// if err != nil {
-	// 	fmt.Println("err")
-	// }
-	// fmt.Println(string(body))
+
 	if resp.StatusCode != http.StatusOK {
 		err := json.NewDecoder(resp.Body).Decode(errorResponse)
 		if err != nil {
@@ -106,7 +99,6 @@ func (zc *ZincSearchClient) IndexedSearch(termToSearch string) (*domain.IndexedS
 		return nil, err
 	}
 
-	// fmt.Println(successResponse.Hits[0].Content)
 	return successResponse, nil
 }
 
