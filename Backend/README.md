@@ -1,5 +1,7 @@
 # Api project
 
+![Architecture](images/StructureDiagram.png)
+
 ## Initial configuration
 - Download and install the search engine [ZincSearch]([https://docs.zinc.dev/installation/](https://openobserve.ai/docs/quickstart/#self-hosted-installation))
 - Download the [database](http://www.cs.cmu.edu/~enron/enron_mail_20110402.tgz) where Enron Corp emails are located
