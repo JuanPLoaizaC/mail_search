@@ -4,10 +4,6 @@
 
 This project is used to search for indexed emails in the database of enron emails that are indexed in zinc search.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
 ## Project Setup
 
 ```sh
