@@ -29,7 +29,7 @@ go run main.go
 ## Profiling
 - To do the profiling run the main file with the following command.
 ```sh
-go run main.go -cpuprofile=cpu.prof -memprofile=mem.prof
+go run main.go -cpuprofile=cpu.prof
 ```
 
 - To see the reesult of the profiling.
