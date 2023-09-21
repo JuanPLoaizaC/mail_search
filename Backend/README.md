@@ -1,18 +1,24 @@
 # Api project
 
-## Set in motion
-- Download and install the search engine [ZincSearch](https://docs.zinc.dev/installation/)
+## Initial configuration
+- Download and install the search engine [ZincSearch]([https://docs.zinc.dev/installation/](https://openobserve.ai/docs/quickstart/#self-hosted-installation))
 - Download the [database](http://www.cs.cmu.edu/~enron/enron_mail_20110402.tgz) where Enron Corp emails are located
 
-- The main file to run the project is located in 'email-indexer/server/cmd'.
+- The main file to run the project is located in 'mail_search/backend/cmd'.
 ```sh
-cd email-indexer/server/cmd
+cd mail_search/backend/cmd
 ```
 
-- Then the environment variables 'ZINC_FIRST_ADMIN_USER' and 'ZINC_FIRST_ADMIN_PASSWORD' must be set. These variables are used to do a basic authentication with ZinchSearch.
+- To install the dependencies.
 ```sh
-set ZINC_FIRST_ADMIN_USER=admin
-set ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
+go mod tidy
+```
+
+- Run open observe. Set 'ZINC_FIRST_ADMIN_USER' and 'ZINC_FIRST_ADMIN_PASSWORD' variables.
+```sh
+set ZO_ROOT_USER_EMAIL=root@example.com
+set ZO_ROOT_USER_PASSWORD=Complexpass#123
+openobserve.exe
 ```
 
 - And finally
@@ -20,3 +26,13 @@ set ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
 go run main.go
 ```
 
+## Profiling
+- To do the profiling run the main file with the following command.
+```sh
+go run main.go -cpuprofile=cpu.prof -memprofile=mem.prof
+```
+
+- To see the reesult of the profiling.
+```sh
+go tool pprof -http=:8080 cpu
+```
