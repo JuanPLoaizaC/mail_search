@@ -14,3 +14,6 @@ coverage
 
 # enron database 
 Files
+
+# credentials
+environment.go

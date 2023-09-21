@@ -28,7 +28,7 @@ func NewIndexerService(ds domain.IEmail) *IndexerEmailService {
 func (ies *IndexerEmailService) IndexEmails() {
 	emailUsers, err := ies.getMailUsers()
 	if err != nil {
-		// customerror.NewCustomError(http.StatusInternalServerError, err.Error()).ErrorResponseHandling(w, r)
+		fmt.Printf("error getting users: %v\n", err)
 		return
 	}
 
@@ -59,11 +59,13 @@ func (ies *IndexerEmailService) indexEmailByUser(userEmail string, wg *sync.Wait
 	defer wg.Done()
 	emails, err := ies.processMailsByUser(userEmail)
 	if err != nil {
+		fmt.Printf("Error processing emails for user %s: %v\n", userEmail, err)
 		return
 	}
 
 	err = ies.indexEmails(emails)
 	if err != nil {
+		fmt.Printf("Error indexing emails for user %s: %v\n", userEmail, err)
 		return
 	}
 }
@@ -87,6 +89,7 @@ func readEmails(emails *[]domain.Email) filepath.WalkFunc {
 		if !info.IsDir() {
 			email, err := processEmailFile(path)
 			if err != nil {
+				fmt.Printf("Error processing email file %s: %v\n", path, err)
 				return nil
 			}
 			*emails = append(*emails, *email)

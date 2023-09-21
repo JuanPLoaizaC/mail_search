@@ -126,23 +126,11 @@ func makeBodyRequest(bodyRequest interface{}) io.Reader {
 }
 
 func setHeaders(req *http.Request) {
-	user, pass := getAuthentication()
-	req.SetBasicAuth(user, pass)
+	req.SetBasicAuth(ZO_ROOT_USER_EMAIL, ZO_ROOT_USER_PASSWORD)
 
 	for k, v := range headers {
 		req.Header.Set(k, v)
 	}
-}
-
-func getAuthentication() (string, string) {
-	// user := os.Getenv("ZO_ROOT_USER_EMAIL")
-	// pass := os.Getenv("ZINC_FIRST_ADMIN_PASSWORD")
-
-	// if user == "" || pass == "" {
-	// 	panic("ZO_ROOT_USER_EMAIL and  ZO_ROOT_USER_PASSWORD must be set")
-	// }
-	return "juanpablo9730@gmail.com", "Bur11Caldas"
-	// return base64.StdEncoding.EncodeToString([]byte(user + ":" + pass))
 }
 
 func makeSqlQuery(term string) string {
