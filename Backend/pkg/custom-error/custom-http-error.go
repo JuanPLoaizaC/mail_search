@@ -13,7 +13,7 @@ type CustomHttpError struct {
 	ErrorText string `json:"error,omitempty"`
 }
 
-// NewCustomError works as the conntrucutor of the CustomError struc
+// NewCustomError works as the constructor of the CustomError struc
 func NewCustomHttpError(statusCode int, errMessage string) *CustomHttpError {
 	customErr := &CustomHttpError{
 		Status:    statusCode,

@@ -1,11 +1,12 @@
 package domain
 
+// IEmail is the contract that must implement the data source.
 type IEmail interface {
 	IndexEmails(emails interface{}) (*IndexEmailResponse, error)
 	IndexedSearch(term string) (*IndexedSearchResponse, error)
 }
 
-// IndexerEmailResponse is the response for the IndexEmailResponse function
+// IndexEmailResponse is the response for the IndexEmailResponse function
 type IndexEmailResponse struct {
 	Code   int                        `json:"code"`
 	Status []IndexEmailStatusResponse `json:"status"`
@@ -19,7 +20,7 @@ type IndexEmailStatusResponse struct {
 
 // IndexedSearchRequest is the request for the IndexedSearch function
 type IndexedSearchRequest struct {
-	// Aggs  struct{}                  `json:"aggs"`
+	// Aggs  struct{}               `json:"aggs"`
 	Query QueryIndexedSearchRequest `json:"query"`
 }
 

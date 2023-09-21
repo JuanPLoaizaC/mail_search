@@ -14,12 +14,14 @@ const (
 	serverPort = ":8000"
 )
 
+// Api contains the structure of the server
 type Api struct {
 	Router               *chi.Mux
 	httpClient           *http.Client
 	indexedSearchHandler *handler.IndexedSearchHandler
 }
 
+// NewApi works as the constructor of the Api struc
 func NewApi() *Api {
 	server := &Api{}
 	server.configureHttpClient()
@@ -29,10 +31,12 @@ func NewApi() *Api {
 	return server
 }
 
+// configureHttpClient setups the http client which needs the sling client
 func (a *Api) configureHttpClient() {
 	a.httpClient = &http.Client{}
 }
 
+// configureDependencies setups dependency injection
 func (a *Api) configureDependencies() {
 	datasourceZincSearch := database.NewZincsearchClient(a.httpClient)
 

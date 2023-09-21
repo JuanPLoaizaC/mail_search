@@ -21,16 +21,19 @@ const (
 	streamName            = "enron_emails"
 )
 
+// ZincSearchClient is the client that will communicate with the zincsearch api
 type ZincSearchClient struct {
 	client *http.Client
 }
 
+// NewZincsearchClient  works as the constructor of the ZincsearchClient struc
 func NewZincsearchClient(client *http.Client) *ZincSearchClient {
 	return &ZincSearchClient{
 		client: client,
 	}
 }
 
+// IndexEmails uses the zincsearch API to create indexed documents
 func (zc *ZincSearchClient) IndexEmails(emailsToinsert interface{}) (*domain.IndexEmailResponse, error) {
 	successResponse := &domain.IndexEmailResponse{}
 	errorResponse := &domain.ErrorReponse{}
@@ -63,6 +66,7 @@ func (zc *ZincSearchClient) IndexEmails(emailsToinsert interface{}) (*domain.Ind
 	return successResponse, nil
 }
 
+// IndexedSearch uses the zincsearch API to perform an indexed search for a term within the content of documents
 func (zc *ZincSearchClient) IndexedSearch(termToSearch string) (*domain.IndexedSearchResponse, error) {
 	successResponse := &domain.IndexedSearchResponse{}
 	errorResponse := &domain.ErrorReponse{}
@@ -102,6 +106,7 @@ func (zc *ZincSearchClient) IndexedSearch(termToSearch string) (*domain.IndexedS
 	return successResponse, nil
 }
 
+// makeRequest makes a request to the provided url with the provided POST method and body
 func makeRequest(url string, body interface{}) (*http.Request, error) {
 	bodyRequest := makeBodyRequest(body)
 
@@ -125,6 +130,7 @@ func makeBodyRequest(bodyRequest interface{}) io.Reader {
 	return bytes.NewReader(body)
 }
 
+// setHeaders configures the headers for the request to the zincsearch api
 func setHeaders(req *http.Request) {
 	req.SetBasicAuth(ZO_ROOT_USER_EMAIL, ZO_ROOT_USER_PASSWORD)
 

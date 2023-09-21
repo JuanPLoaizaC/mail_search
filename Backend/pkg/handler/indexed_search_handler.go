@@ -8,26 +8,30 @@ import (
 	"github.com/go-chi/render"
 )
 
+// IndexedSearchHandler is the handler for the IndexedSearch requests
 type IndexedSearchHandler struct {
 	indexedSearchService IIndexedSearch
 }
 
+// NewIndexedSearchHandler works as the constructor of the IndexedSearchHandler
 func NewIndexedSearchHandler(iss IIndexedSearch) *IndexedSearchHandler {
 	return &IndexedSearchHandler{
 		indexedSearchService: iss,
 	}
 }
 
+// SearchTermInEmailsResponse is the response for the SearchTermInEmails method
 type SearchTermInEmailsResponse struct {
 	Emails []domain.Email `json:"emails"`
 }
 
+// SearchTermInEmails is the method that searches for a term in the emails.
 func (ish *IndexedSearchHandler) SearchTermInEmails(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	term := query.Get("term")
 
 	if len(term) > 150 || len(term) < 2 {
-		errMessage := "term invalid. Length must be between 3 and 150"
+		errMessage := "term invalid. Length must be between 2 and 150"
 		customerror.NewCustomHttpError(http.StatusBadRequest, errMessage).ErrorResponseHandling(w, r)
 		return
 	}

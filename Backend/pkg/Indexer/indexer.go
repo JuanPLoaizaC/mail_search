@@ -8,11 +8,13 @@ import (
 	"github.com/JuanPLoaizaC/mail_search/tree/main/Backend/pkg/service"
 )
 
+// Indexer contains the structure of the indexer service
 type Indexer struct {
 	httpClient     *http.Client
 	indexerService *service.IndexerEmailService
 }
 
+// NewIndexer works as the constructor of the Indexer struc
 func NewIndexer() *Indexer {
 	indexer := &Indexer{}
 	indexer.configureHttpClient()
@@ -21,10 +23,12 @@ func NewIndexer() *Indexer {
 	return indexer
 }
 
+// configureHttpClient to communicate with zincsearch
 func (i *Indexer) configureHttpClient() {
 	i.httpClient = &http.Client{}
 }
 
+// configureDependencies setups dependency injection
 func (i *Indexer) configureDependencies() {
 	zincSearch := database.NewZincsearchClient(i.httpClient)
 
